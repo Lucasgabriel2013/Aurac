@@ -19,6 +19,9 @@ public class TileManager {
     public static BufferedImage grass;
     public static BufferedImage water;
     public static BufferedImage quartz;
+    public static BufferedImage path;
+
+    public InputStream is = getClass().getResourceAsStream("/maps/map.txt");
 
     static {
         try {
@@ -26,6 +29,7 @@ public class TileManager {
             grass = ImageIO.read(TileManager.class.getResourceAsStream("/tiles/grass.png"));
             water = ImageIO.read(TileManager.class.getResourceAsStream("/tiles/water.png"));
             quartz = ImageIO.read(TileManager.class.getResourceAsStream("/tiles/quartz.png"));
+            path = ImageIO.read(TileManager.class.getResourceAsStream("/tiles/path.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -37,7 +41,6 @@ public class TileManager {
         mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 
         getTileImage();
-        loadMap();
     }
 
     public void getTileImage() {
@@ -54,11 +57,13 @@ public class TileManager {
         tiles[3] = new Tile();
         tiles[3].image = quartz;
         tiles[3].collision = true;
+
+        tiles[4] = new Tile();
+        tiles[4].image = path;
     }
 
     public void loadMap() {
         try {
-            InputStream is = getClass().getResourceAsStream("/maps/map01.txt");
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
             int col = 0;
@@ -87,6 +92,8 @@ public class TileManager {
     }
 
     public void draw(Graphics2D g2) {
+        loadMap();
+
         int worldCol = 0;
         int worldRow = 0;
 

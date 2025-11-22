@@ -3,8 +3,8 @@ package objects;
 import javax.imageio.ImageIO;
 import java.io.IOException;
 
-public class OBJ_Auracball extends SuperObject {
-    public OBJ_Auracball() {
+public class Auracball extends GameObject {
+    public Auracball() {
         name = "AuracBall";
 
         try {

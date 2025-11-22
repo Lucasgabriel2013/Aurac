@@ -58,6 +58,36 @@ public class KeyInput implements KeyListener {
                 gp.gameState = GameState.PLAY;
             }
         }
+        // Title
+        else if (gp.gameState == GameState.TITLE) {
+            if (code == KeyEvent.VK_W) {
+                gp.ui.commandNum--;
+                if (gp.ui.commandNum < 0) {
+                    gp.ui.commandNum = 2;
+                }
+            }
+
+            if (code == KeyEvent.VK_S) {
+                gp.ui.commandNum++;
+                if (gp.ui.commandNum > 2) {
+                    gp.ui.commandNum = 0;
+                }
+            }
+
+            if (code == KeyEvent.VK_ENTER) {
+                if (gp.ui.commandNum == 0) {
+                    gp.gameState = GameState.PLAY;
+                }
+
+                if (gp.ui.commandNum == 1) {
+                    // Later
+                }
+
+                if (gp.ui.commandNum == 2) {
+                    System.exit(0);
+                }
+            }
+        }
     }
 
     @Override

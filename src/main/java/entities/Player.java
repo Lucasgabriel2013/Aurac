@@ -1,6 +1,7 @@
 package entities;
 
 import main.*;
+import objects.Door;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -67,7 +68,7 @@ public class Player extends Entity {
             gp.collisionChecker.checkCollision(this);
 
             int objIndex = gp.collisionChecker.checkObject(this, true);
-            pickUpObject(objIndex);
+            interactObject(objIndex);
 
             int npcIndex = gp.collisionChecker.checkEntity(this, gp.npc);
             interactNPC(npcIndex);
@@ -101,12 +102,18 @@ public class Player extends Entity {
         }
     }
 
-    public void pickUpObject(int index) {
+    public void interactObject(int index) {
         if (index != 999) {
             if (gp.obj[index].name.equals("AuracBall")) {
                 gp.playSE(1);
                 gp.obj[index] = null;
                 gp.ui.showMessage("+1 AuracBall");
+            } else if (gp.obj[index].name.equals("Door")) {
+                gp.tileM.is = ((Door) gp.obj[index]).place;
+                gp.player.worldX = ((Door) gp.obj[index]).nextX * gp.tileSize;
+                gp.player.worldY = ((Door) gp.obj[index]).nextY * gp.tileSize;
+                gp.maxWorldRow = ((Door) gp.obj[index]).worldX;
+                gp.maxWorldCol = ((Door) gp.obj[index]).worldY;
             }
         }
     }

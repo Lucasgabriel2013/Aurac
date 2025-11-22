@@ -11,15 +11,18 @@ public class AssetSetter {
     }
 
     public void setObjects() {
-        gp.obj[0] = new OBJ_Auracball();
+        gp.obj[0] = new Auracball();
         gp.obj[0].worldX = 8 * gp.tileSize;
         gp.obj[0].worldY = 42 * gp.tileSize;
         gp.obj[0].collision = true;
 
-        gp.obj[1] = new OBJ_Door();
-        gp.obj[1].worldX = 8 * gp.tileSize;
-        gp.obj[1].worldY = 42 * gp.tileSize;
-        gp.obj[1].collision = true;
+//        gp.obj[1] = new Door();
+//        gp.obj[1].worldX = 37 * gp.tileSize;
+//        gp.obj[1].worldY = 22 * gp.tileSize;
+//        gp.obj[1].collision = true;
+//        ((Door) gp.obj[1]).place = getClass().getResourceAsStream("/maps/laboratory.txt");
+//        ((Door) gp.obj[1]).nextX = 7;
+//        ((Door) gp.obj[1]).nextY = 3;
     }
 
     public void setNpcs() {

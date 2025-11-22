@@ -2,9 +2,14 @@ package objects;
 
 import javax.imageio.ImageIO;
 import java.io.IOException;
+import java.io.InputStream;
 
-public class OBJ_Door extends SuperObject {
-    public OBJ_Door() {
+public class Door extends GameObject {
+    public InputStream place;
+    public int nextX, nextY;
+    public int worldX, worldY;
+
+    public Door() {
         name = "Door";
 
         try {
