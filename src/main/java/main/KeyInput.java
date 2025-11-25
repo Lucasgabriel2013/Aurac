@@ -88,6 +88,36 @@ public class KeyInput implements KeyListener {
                 }
             }
         }
+        // Choice
+        else if (gp.gameState == GameState.AURACMON_CHOICE) {
+            if (code == KeyEvent.VK_A) {
+                gp.ui.commandNum--;
+                if (gp.ui.commandNum < 0) {
+                    gp.ui.commandNum = 2;
+                }
+            }
+
+            if (code == KeyEvent.VK_D) {
+                gp.ui.commandNum++;
+                if (gp.ui.commandNum > 2) {
+                    gp.ui.commandNum = 0;
+                }
+            }
+
+            if (code == KeyEvent.VK_ENTER) {
+                if (gp.ui.commandNum == 0) {
+                    gp.gameState = GameState.PLAY;
+                }
+
+                if (gp.ui.commandNum == 1) {
+                    gp.gameState = GameState.PLAY;
+                }
+
+                if (gp.ui.commandNum == 2) {
+                    gp.gameState = GameState.PLAY;
+                }
+            }
+        }
     }
 
     @Override

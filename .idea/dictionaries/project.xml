@@ -2,8 +2,14 @@
   <dictionary name="project">
     <words>
       <w>auracball</w>
+      <w>auracdex</w>
       <w>auracmon</w>
+      <w>auracmons</w>
+      <w>firemon</w>
+      <w>grassmon</w>
       <w>npcs</w>
+      <w>pkmn</w>
+      <w>watermon</w>
     </words>
   </dictionary>
 </component>

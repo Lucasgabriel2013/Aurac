@@ -4,5 +4,6 @@ public enum GameState {
     TITLE,
     PLAY,
     PAUSED,
-    DIALOGUE
+    DIALOGUE,
+    AURACMON_CHOICE
 }

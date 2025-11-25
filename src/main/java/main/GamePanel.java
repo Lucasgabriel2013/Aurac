@@ -21,7 +21,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     // World Settings
     public int maxWorldCol = 50;
-    public int maxWorldRow = 50;
+    public int maxWorldRow = 30;
 
     // Others
     public TileManager tileM = new TileManager(this);
@@ -40,9 +40,9 @@ public class GamePanel extends JPanel implements Runnable {
     public Entity[] npc = new Entity[10];
 
     // Game State
-    public GameState gameState;
+    public GameState gameState = GameState.TITLE;
 
-    int FPS = 180;
+    int FPS = 60;
 
     public GamePanel() {
         setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -57,7 +57,6 @@ public class GamePanel extends JPanel implements Runnable {
         assetSetter.setNpcs();
         assetSetter.setObjects();
         playMusic(0);
-        gameState = GameState.TITLE;
     }
 
     public void startGameThread() {

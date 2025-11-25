@@ -1,6 +1,9 @@
 package main;
 
+import auracmons.*;
+
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -36,25 +39,11 @@ public class UI {
         g2.setFont(pressStart);
         g2.setColor(Color.WHITE);
 
-        // Title State
-        if (gp.gameState == GameState.TITLE){
-            drawTitleScreen();
-        }
-
-        // Pause state
-        if (gp.gameState == GameState.PAUSED) {
-            String text = "PAUSED";
-
-            int length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-
-            int x = gp.screenWidth / 2 - length / 2;
-            int y = gp.screenHeight / 2;
-
-            g2.drawString(text, x, y);
-        }
-        // Dialogue state
-        if (gp.gameState == GameState.DIALOGUE) {
-            drawDialogueScreen();
+        switch (gp.gameState) {
+            case TITLE -> drawTitleScreen();
+            case PAUSED -> drawPauseScreen();
+            case DIALOGUE -> drawDialogueScreen();
+            case AURACMON_CHOICE -> drawChoiceScreen();
         }
 
         if (messageOn) {
@@ -70,8 +59,24 @@ public class UI {
         }
     }
 
+    private void drawPauseScreen() {
+        String text = "PAUSED";
+        g2.setFont(g2.getFont().deriveFont(30f));
+
+        int length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+
+        int x = gp.screenWidth / 2 - length / 2;
+        int y = gp.screenHeight / 2;
+
+        g2.setColor(Color.BLACK);
+        g2.drawString(text, x + 2, y + 2);
+
+        g2.setColor(Color.WHITE);
+        g2.drawString(text, x, y);
+    }
+
     public void drawTitleScreen() {
-        g2.setColor(new Color(70,  120, 80));
+        g2.setColor(new Color(70, 120, 80));
         g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
 
         // Title
@@ -157,5 +162,89 @@ public class UI {
         g2.setColor(color);
         g2.setStroke(new BasicStroke(5));
         g2.drawRoundRect(x + 5, y + 5, width - 10, height - 10, 25, 25);
+    }
+
+    public void drawChoiceScreen() {
+        BufferedImage img;
+
+        g2.setColor(new Color(70, 120, 80));
+        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+
+        // Title
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 40f));
+        String text = "Escolha um inicial";
+        int length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+
+        int x = gp.screenWidth / 2 - length / 2;
+        int y = gp.tileSize * 3;
+
+        // Shadow
+        g2.setColor(Color.black);
+        g2.drawString(text, x + 5, y + 5);
+
+        // Main color
+        g2.setColor(Color.white);
+        g2.drawString(text, x, y);
+
+        // Inicial: Grama
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 30f));
+        text = "GRAMA";
+        length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+
+        x = gp.screenWidth / 4 - 35 - length / 4;
+        y += gp.tileSize * 3;
+        g2.drawString(text, x, y);
+        if (commandNum == 0) {
+            g2.drawString(">", x - gp.tileSize, y);
+        }
+
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 15f));
+        y += gp.tileSize;
+        g2.drawString("Nome", x, y);
+
+        y += gp.tileSize / 2;
+
+        img = new Grassmon().auracdexImage();
+        g2.drawImage(img, x, y, gp.tileSize, gp.tileSize, null);
+
+        // Inicial: Água
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 30f));
+        y = gp.tileSize * 6;
+        text = "ÁGUA";
+        length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+
+        x += gp.screenWidth / 3 - length / 3;
+        g2.drawString(text, x, y);
+        if (commandNum == 1) {
+            g2.drawString(">", x - gp.tileSize, y);
+        }
+
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 15f));
+        y += gp.tileSize;
+        g2.drawString("Nome", x, y);
+
+        y += gp.tileSize / 2;
+        img = new Watermon().auracdexImage();
+        g2.drawImage(img, x, y, gp.tileSize, gp.tileSize, null);
+
+        // Inicial: Fogo
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 30f));
+        text = "FOGO";
+        length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+
+        x += gp.screenWidth / 3 - length / 3;
+        y = gp.tileSize * 6;
+        g2.drawString(text, x, y);
+        if (commandNum == 2) {
+            g2.drawString(">", x - gp.tileSize, y);
+        }
+
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 15f));
+        y += gp.tileSize;
+        g2.drawString("Nome", x, y);
+
+        y += gp.tileSize / 2;
+        img = new Firemon().auracdexImage();
+        g2.drawImage(img, x, y, gp.tileSize, gp.tileSize, null);
     }
 }

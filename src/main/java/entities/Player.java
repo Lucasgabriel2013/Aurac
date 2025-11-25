@@ -1,7 +1,6 @@
 package entities;
 
 import main.*;
-import objects.Door;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -32,7 +31,7 @@ public class Player extends Entity {
     public void setDefaultValues() {
         worldX = 800;
         worldY = 850;
-        speed = 4;
+        speed = 6;
         direction = Direction.DOWN;
     }
 
@@ -73,6 +72,8 @@ public class Player extends Entity {
             int npcIndex = gp.collisionChecker.checkEntity(this, gp.npc);
             interactNPC(npcIndex);
 
+            gp.eventHandler.checkEvent();
+
             if (!onCollision) {
                 switch (direction) {
                     case UP:
@@ -108,12 +109,10 @@ public class Player extends Entity {
                 gp.playSE(1);
                 gp.obj[index] = null;
                 gp.ui.showMessage("+1 AuracBall");
-            } else if (gp.obj[index].name.equals("Door")) {
-                gp.tileM.is = ((Door) gp.obj[index]).place;
-                gp.player.worldX = ((Door) gp.obj[index]).nextX * gp.tileSize;
-                gp.player.worldY = ((Door) gp.obj[index]).nextY * gp.tileSize;
-                gp.maxWorldRow = ((Door) gp.obj[index]).worldX;
-                gp.maxWorldCol = ((Door) gp.obj[index]).worldY;
+            } else if (gp.obj[index].name.equals("Bag")) {
+                gp.obj[index] = null;
+                gp.gameState = GameState.AURACMON_CHOICE;
+                gp.npc[0] = null;
             }
         }
     }
@@ -125,11 +124,6 @@ public class Player extends Entity {
         }
 
         gp.keyInput.dialogue = false;
-    }
-
-    @Override
-    public void speak() {
-
     }
 
     public void draw(Graphics2D g2) {

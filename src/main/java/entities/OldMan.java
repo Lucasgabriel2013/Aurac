@@ -26,5 +26,6 @@ public class OldMan extends Entity {
 
     public void setDialogues() {
         dialogue[0] = "Escolha um inicial antes de passar, \nsó irei te deixar passar com um.";
+        dialogue[1] = "Siga o caminho e pegue a bolsa";
     }
 }
