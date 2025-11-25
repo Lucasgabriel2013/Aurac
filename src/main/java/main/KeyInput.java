@@ -1,5 +1,7 @@
 package main;
 
+import main.ui.*;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -19,104 +21,16 @@ public class KeyInput implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
 
-        // Playing
-        if (gp.gameState == GameState.PLAY) {
-            // Moves
-            if (code == KeyEvent.VK_W) {
-                upPressed = true;
-            }
+        switch (gp.gameState) {
+            case PLAY -> playing(code);
 
-            if (code == KeyEvent.VK_S) {
-                downPressed = true;
-            }
+            case TITLE -> new TitleScreen(gp).input(code);
 
-            if (code == KeyEvent.VK_A) {
-                leftPressed = true;
-            }
+            case PAUSED -> new PauseScreen(gp).input(code);
 
-            if (code == KeyEvent.VK_D) {
-                rightPressed = true;
-            }
+            case DIALOGUE -> new DialogueScreen(gp).input(code);
 
-            if (code == KeyEvent.VK_E) {
-                gp.gameState = GameState.PAUSED;
-            }
-
-            if (code == KeyEvent.VK_F) {
-                dialogue = true;
-            }
-        }
-        // Paused
-        else if (gp.gameState == GameState.PAUSED) {
-            if (code == KeyEvent.VK_E) {
-                gp.gameState = GameState.PLAY;
-            }
-        }
-        // in Dialogue
-        else if (gp.gameState == GameState.DIALOGUE) {
-            if (code == KeyEvent.VK_F) {
-                gp.gameState = GameState.PLAY;
-            }
-        }
-        // Title
-        else if (gp.gameState == GameState.TITLE) {
-            if (code == KeyEvent.VK_W) {
-                gp.ui.commandNum--;
-                if (gp.ui.commandNum < 0) {
-                    gp.ui.commandNum = 2;
-                }
-            }
-
-            if (code == KeyEvent.VK_S) {
-                gp.ui.commandNum++;
-                if (gp.ui.commandNum > 2) {
-                    gp.ui.commandNum = 0;
-                }
-            }
-
-            if (code == KeyEvent.VK_ENTER) {
-                if (gp.ui.commandNum == 0) {
-                    gp.gameState = GameState.PLAY;
-                }
-
-                if (gp.ui.commandNum == 1) {
-                    // Later
-                }
-
-                if (gp.ui.commandNum == 2) {
-                    System.exit(0);
-                }
-            }
-        }
-        // Choice
-        else if (gp.gameState == GameState.AURACMON_CHOICE) {
-            if (code == KeyEvent.VK_A) {
-                gp.ui.commandNum--;
-                if (gp.ui.commandNum < 0) {
-                    gp.ui.commandNum = 2;
-                }
-            }
-
-            if (code == KeyEvent.VK_D) {
-                gp.ui.commandNum++;
-                if (gp.ui.commandNum > 2) {
-                    gp.ui.commandNum = 0;
-                }
-            }
-
-            if (code == KeyEvent.VK_ENTER) {
-                if (gp.ui.commandNum == 0) {
-                    gp.gameState = GameState.PLAY;
-                }
-
-                if (gp.ui.commandNum == 1) {
-                    gp.gameState = GameState.PLAY;
-                }
-
-                if (gp.ui.commandNum == 2) {
-                    gp.gameState = GameState.PLAY;
-                }
-            }
+            case AURACMON_CHOICE -> new ChoiceScreen(gp).input(code);
         }
     }
 
@@ -138,6 +52,32 @@ public class KeyInput implements KeyListener {
 
         if (code == KeyEvent.VK_D) {
             rightPressed = false;
+        }
+    }
+
+    public void playing(int code) {
+        if (code == KeyEvent.VK_W) {
+            upPressed = true;
+        }
+
+        if (code == KeyEvent.VK_S) {
+            downPressed = true;
+        }
+
+        if (code == KeyEvent.VK_A) {
+            leftPressed = true;
+        }
+
+        if (code == KeyEvent.VK_D) {
+            rightPressed = true;
+        }
+
+        if (code == KeyEvent.VK_E) {
+            gp.gameState = GameState.PAUSED;
+        }
+
+        if (code == KeyEvent.VK_F) {
+            dialogue = true;
         }
     }
 }

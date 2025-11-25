@@ -39,10 +39,10 @@ public class UI {
         g2.setColor(Color.WHITE);
 
         switch (gp.gameState) {
-            case TITLE -> new TitleScreenUI(gp).draw(g2);
-            case PAUSED -> drawPauseScreen();
-            case DIALOGUE -> new DialogueScreenUI(gp).draw(g2);
-            case AURACMON_CHOICE -> new ChoiceScreenUI(gp).draw(g2);
+            case TITLE -> new TitleScreen(gp).draw(g2);
+            case PAUSED -> new PauseScreen(gp).draw(g2);
+            case DIALOGUE -> new DialogueScreen(gp).draw(g2);
+            case AURACMON_CHOICE -> new ChoiceScreen(gp).draw(g2);
         }
 
         if (messageOn) {
@@ -58,17 +58,9 @@ public class UI {
         }
     }
 
-    private void drawPauseScreen() {
-        String text = "PAUSED";
-        g2.setFont(g2.getFont().deriveFont(30f));
-
-        int length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-
-        int x = gp.screenWidth / 2 - length / 2;
-        int y = gp.screenHeight / 2;
-
+    public static void shadowDraw(Graphics2D g2, String text, int x, int y, int shadowSize) {
         g2.setColor(Color.BLACK);
-        g2.drawString(text, x + 2, y + 2);
+        g2.drawString(text, x + shadowSize, y + shadowSize);
 
         g2.setColor(Color.WHITE);
         g2.drawString(text, x, y);

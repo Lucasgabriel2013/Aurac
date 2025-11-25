@@ -1,9 +1,11 @@
 package main;
 
 public enum GameState {
+    // Basics
     TITLE,
     PLAY,
     PAUSED,
     DIALOGUE,
-    AURACMON_CHOICE
+    AURACMON_CHOICE,
+    INVENTORY
 }
