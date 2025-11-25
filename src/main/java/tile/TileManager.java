@@ -1,6 +1,7 @@
 package tile;
 
 import main.GamePanel;
+import utils.ImageUtils;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -15,25 +16,13 @@ public class TileManager {
     public Tile[] tiles;
     public int[][] mapTileNum;
 
-    public static BufferedImage dirt;
-    public static BufferedImage grass;
-    public static BufferedImage water;
-    public static BufferedImage quartz;
-    public static BufferedImage path;
+    public static BufferedImage dirt = ImageUtils.read("/tiles/dirt.png");;
+    public static BufferedImage grass = ImageUtils.read("/tiles/grass.png");;
+    public static BufferedImage water = ImageUtils.read("/tiles/water.png");;
+    public static BufferedImage quartz = ImageUtils.read("/tiles/quartz.png");;
+    public static BufferedImage path = ImageUtils.read("/tiles/path.png");;
 
     public InputStream is = getClass().getResourceAsStream("/maps/map.txt");
-
-    static {
-        try {
-            dirt = ImageIO.read(TileManager.class.getResourceAsStream("/tiles/dirt.png"));
-            grass = ImageIO.read(TileManager.class.getResourceAsStream("/tiles/grass.png"));
-            water = ImageIO.read(TileManager.class.getResourceAsStream("/tiles/water.png"));
-            quartz = ImageIO.read(TileManager.class.getResourceAsStream("/tiles/quartz.png"));
-            path = ImageIO.read(TileManager.class.getResourceAsStream("/tiles/path.png"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     public TileManager(GamePanel gp) {
         this.gp = gp;

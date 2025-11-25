@@ -1,17 +1,12 @@
 package objects;
 
-import javax.imageio.ImageIO;
-import java.io.IOException;
+import utils.ImageUtils;
 
 public class Auracball extends GameObject {
     public Auracball() {
         name = "AuracBall";
 
-        try {
-            image = ImageIO.read(getClass().getResourceAsStream("/objects/auracball.png"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        image = ImageUtils.read("/objects/auracball.png");
 
         collision = true;
     }

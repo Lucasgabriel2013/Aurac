@@ -1,16 +1,20 @@
 package entities;
 
+import auracmons.Auracmon;
 import main.*;
+import utils.ImageUtils;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Player extends Entity {
     KeyInput keyInput;
 
     public final int screenX, screenY;
+
+    List<Auracmon> auracmons = new ArrayList<>();
 
     public Player(GamePanel gp, KeyInput keyI) {
         super(gp);
@@ -36,19 +40,15 @@ public class Player extends Entity {
     }
 
     public void getPlayerImage() {
-        try {
-            up1 = ImageIO.read(getClass().getResourceAsStream("/player/up1.png"));
-            down1 = ImageIO.read(getClass().getResourceAsStream("/player/down1.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("/player/left1.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("/player/right1.png"));
+        up1 = ImageUtils.read("/player/up1.png");
+        down1 = ImageUtils.read("/player/down1.png");
+        left1 = ImageUtils.read("/player/left1.png");
+        right1 = ImageUtils.read("/player/right1.png");
 
-            up2 = ImageIO.read(getClass().getResourceAsStream("/player/up2.png"));
-            down2 = ImageIO.read(getClass().getResourceAsStream("/player/down2.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("/player/left2.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("/player/right2.png"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        up2 = ImageUtils.read("/player/up2.png");
+        down2 = ImageUtils.read("/player/down2.png");
+        left2 = ImageUtils.read("/player/left2.png");
+        right2 = ImageUtils.read("/player/right2.png");
     }
 
     public void update() {
@@ -106,7 +106,7 @@ public class Player extends Entity {
     public void interactObject(int index) {
         if (index != 999) {
             if (gp.obj[index].name.equals("AuracBall")) {
-                gp.playSE(1);
+                gp.playSound(1);
                 gp.obj[index] = null;
                 gp.ui.showMessage("+1 AuracBall");
             } else if (gp.obj[index].name.equals("Bag")) {

@@ -2,6 +2,7 @@ package main;
 
 import entities.Entity;
 import entities.Player;
+import main.ui.UI;
 import objects.GameObject;
 import tile.TileManager;
 
@@ -137,7 +138,7 @@ public class GamePanel extends JPanel implements Runnable {
         music.loop();
     }
 
-    public void playSE(int i) {
+    public void playSound(int i) {
         soundEffect.setFile(i);
         soundEffect.play();
     }
