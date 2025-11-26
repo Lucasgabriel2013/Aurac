@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 public abstract class Auracmon {
     public AuracmonType type1, type2;
     public String name;
+    public String description;
     public int hp, maxLife;
     public int level;
 

@@ -72,6 +72,8 @@ public class PauseScreen {
             if (gp.ui.commandNum == 3) {
                 gp.gameState = GameState.TITLE;
             }
+
+            gp.ui.commandNum = 0;
         }
     }
 }

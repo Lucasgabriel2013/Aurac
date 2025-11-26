@@ -44,7 +44,10 @@ public class EventHandler {
         }
 
         if (canTouchEvent) {
-            // Events
+            // Grass Event
+//            if (((gp.player.worldX + gp.player.solidArea.x) / gp.tileSize)) {
+//
+//            }
         }
     }
 

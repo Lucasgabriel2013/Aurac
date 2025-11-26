@@ -41,6 +41,7 @@ public class UI {
         switch (gp.gameState) {
             case TITLE -> new TitleScreen(gp).draw(g2);
             case PAUSED -> new PauseScreen(gp).draw(g2);
+            case INVENTORY -> new InventoryScreen(gp).draw(g2);
             case DIALOGUE -> new DialogueScreen(gp).draw(g2);
             case AURACMON_CHOICE -> new ChoiceScreen(gp).draw(g2);
         }

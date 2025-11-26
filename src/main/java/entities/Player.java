@@ -1,6 +1,7 @@
 package entities;
 
 import auracmons.Auracmon;
+import items.*;
 import main.*;
 import utils.ImageUtils;
 
@@ -14,7 +15,8 @@ public class Player extends Entity {
 
     public final int screenX, screenY;
 
-    List<Auracmon> auracmons = new ArrayList<>();
+    public List<Auracmon> auracmons = new ArrayList<>();
+    public List<Item> items = new ArrayList<>();
 
     public Player(GamePanel gp, KeyInput keyI) {
         super(gp);
@@ -109,6 +111,7 @@ public class Player extends Entity {
                 gp.playSound(1);
                 gp.obj[index] = null;
                 gp.ui.showMessage("+1 AuracBall");
+                items.add(new Auracball());
             } else if (gp.obj[index].name.equals("Bag")) {
                 gp.obj[index] = null;
                 gp.gameState = GameState.AURACMON_CHOICE;

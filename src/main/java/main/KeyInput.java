@@ -23,13 +23,10 @@ public class KeyInput implements KeyListener {
 
         switch (gp.gameState) {
             case PLAY -> playing(code);
-
             case TITLE -> new TitleScreen(gp).input(code);
-
             case PAUSED -> new PauseScreen(gp).input(code);
-
+            case INVENTORY -> new InventoryScreen(gp).input(code);
             case DIALOGUE -> new DialogueScreen(gp).input(code);
-
             case AURACMON_CHOICE -> new ChoiceScreen(gp).input(code);
         }
     }

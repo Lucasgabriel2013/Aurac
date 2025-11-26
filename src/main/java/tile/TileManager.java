@@ -3,11 +3,9 @@ package tile;
 import main.GamePanel;
 import utils.ImageUtils;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -16,13 +14,11 @@ public class TileManager {
     public Tile[] tiles;
     public int[][] mapTileNum;
 
-    public static BufferedImage dirt = ImageUtils.read("/tiles/dirt.png");;
-    public static BufferedImage grass = ImageUtils.read("/tiles/grass.png");;
-    public static BufferedImage water = ImageUtils.read("/tiles/water.png");;
-    public static BufferedImage quartz = ImageUtils.read("/tiles/quartz.png");;
-    public static BufferedImage path = ImageUtils.read("/tiles/path.png");;
-
-    public InputStream is = getClass().getResourceAsStream("/maps/map.txt");
+    public static BufferedImage dirt = ImageUtils.read("/tiles/dirt.png");
+    public static BufferedImage grass = ImageUtils.read("/tiles/grass.png");
+    public static BufferedImage water = ImageUtils.read("/tiles/water.png");
+    public static BufferedImage quartz = ImageUtils.read("/tiles/quartz.png");
+    public static BufferedImage path = ImageUtils.read("/tiles/path.png");
 
     public TileManager(GamePanel gp) {
         this.gp = gp;
@@ -30,6 +26,9 @@ public class TileManager {
         mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 
         getTileImage();
+
+        loadMap("/maps/map.txt", 0);
+        loadMap("/maps/laboratory.txt", 1);
     }
 
     public void getTileImage() {
@@ -51,8 +50,9 @@ public class TileManager {
         tiles[4].image = path;
     }
 
-    public void loadMap() {
+    public void loadMap(String path, int map) {
         try {
+            InputStream is = getClass().getResourceAsStream(path);
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
             int col = 0;
@@ -81,8 +81,6 @@ public class TileManager {
     }
 
     public void draw(Graphics2D g2) {
-        loadMap();
-
         int worldCol = 0;
         int worldRow = 0;
 

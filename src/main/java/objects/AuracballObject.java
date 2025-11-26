@@ -2,8 +2,8 @@ package objects;
 
 import utils.ImageUtils;
 
-public class Auracball extends GameObject {
-    public Auracball() {
+public class AuracballObject extends GameObject {
+    public AuracballObject() {
         name = "AuracBall";
 
         image = ImageUtils.read("/objects/auracball.png");

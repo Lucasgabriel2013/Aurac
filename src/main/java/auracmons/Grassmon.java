@@ -12,6 +12,7 @@ public class Grassmon extends Auracmon {
         type2 = AuracmonType.GRASS;
 
         name = "Grassmon";
+        description = "Um auracmon de tipo grama, é um inicial";
         level = 5;
         hp = 55;
     }

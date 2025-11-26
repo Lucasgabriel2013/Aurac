@@ -86,6 +86,7 @@ public class TitleScreen {
             if (gp.ui.commandNum == 2) {
                 System.exit(0);
             }
+            gp.ui.commandNum = 0;
         }
     }
 }

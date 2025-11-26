@@ -11,7 +11,7 @@ public class AssetSetter {
     }
 
     public void setObjects() {
-        gp.obj[0] = new Auracball();
+        gp.obj[0] = new AuracballObject();
         gp.obj[0].worldX = 8 * gp.tileSize;
         gp.obj[0].worldY = 23 * gp.tileSize;
         gp.obj[0].collision = true;

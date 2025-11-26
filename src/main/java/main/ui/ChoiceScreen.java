@@ -1,5 +1,6 @@
 package main.ui;
 
+import auracmons.Auracmon;
 import auracmons.Firemon;
 import auracmons.Grassmon;
 import auracmons.Watermon;
@@ -13,6 +14,11 @@ import java.awt.image.BufferedImage;
 public class ChoiceScreen {
     GamePanel gp;
 
+    int i;
+    int x, y;
+    int length;
+    String text;
+
     public ChoiceScreen(GamePanel gp) {
         this.gp = gp;
     }
@@ -25,74 +31,40 @@ public class ChoiceScreen {
 
         // Title
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 40f));
-        String text = "Escolha um inicial";
-        int length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+        text = "Escolha um inicial";
+        length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
 
-        int x = gp.screenWidth / 2 - length / 2;
-        int y = gp.tileSize * 3;
+        x = gp.screenWidth / 2 - length / 2;
+        y = gp.tileSize * 3;
 
         UI.shadowDraw(g2, text, x, y, 5);
 
-        // Inicial: Grama
+        drawText(g2, "GRAMA", new Grassmon(), (int) ((float) gp.screenWidth / 2 - length / 2.5f));
+        drawText(g2, "ÁGUA", new Watermon(), gp.screenWidth / 3 - length / 3);
+        drawText(g2, "FOGO", new Firemon(), gp.screenWidth / 3 - length / 3);
+    }
+
+    public void drawText(Graphics2D g2, String text, Auracmon auracmon, int x) {
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 30f));
-        text = "GRAMA";
+        this.text = text;
         length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
 
-        x = gp.screenWidth / 4 - 35 - length / 4;
-        y += gp.tileSize * 3;
-        g2.drawString(text, x, y);
-        if (gp.ui.commandNum == 0) {
-            g2.drawString(">", x - gp.tileSize, y);
-        }
-
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 15f));
-        y += gp.tileSize;
-        g2.drawString("Grassmon", x, y);
-
-        y += gp.tileSize / 2;
-
-        img = new Grassmon().auracdexImage();
-        g2.drawImage(img, x, y, gp.tileSize, gp.tileSize, null);
-
-        // Inicial: Água
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 30f));
+        this.x += x;
         y = gp.tileSize * 6;
-        text = "ÁGUA";
-        length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-
-        x += gp.screenWidth / 3 - length / 3;
-        g2.drawString(text, x, y);
-        if (gp.ui.commandNum == 1) {
-            g2.drawString(">", x - gp.tileSize, y);
+        g2.drawString(this.text, this.x, y);
+        if (gp.ui.commandNum == i) {
+            g2.drawString(">", (int) (this.x - gp.tileSize / 1.5), y);
         }
 
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 15f));
         y += gp.tileSize;
-        g2.drawString("Watermon", x, y);
+        g2.drawString(auracmon.name, this.x, y);
 
         y += gp.tileSize / 2;
-        img = new Watermon().auracdexImage();
-        g2.drawImage(img, x, y, gp.tileSize, gp.tileSize, null);
+        BufferedImage img = auracmon.auracdexImage();
+        g2.drawImage(img, this.x, y, gp.tileSize, gp.tileSize, null);
 
-        // Inicial: Fogo
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 30f));
-        text = "FOGO";
-        length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-
-        x += gp.screenWidth / 3 - length / 3;
-        y = gp.tileSize * 6;
-        g2.drawString(text, x, y);
-        if (gp.ui.commandNum == 2) {
-            g2.drawString(">", x - gp.tileSize, y);
-        }
-
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 15f));
-        y += gp.tileSize;
-        g2.drawString("Firemon", x, y);
-
-        y += gp.tileSize / 2;
-        img = new Firemon().auracdexImage();
-        g2.drawImage(img, x, y, gp.tileSize, gp.tileSize, null);
+        i++;
     }
 
     public void input(int code) {
@@ -113,14 +85,17 @@ public class ChoiceScreen {
         if (code == KeyEvent.VK_ENTER) {
             if (gp.ui.commandNum == 0) {
                 gp.gameState = GameState.PLAY;
+                gp.player.auracmons.add(new Grassmon());
             }
 
             if (gp.ui.commandNum == 1) {
                 gp.gameState = GameState.PLAY;
+                gp.player.auracmons.add(new Watermon());
             }
 
             if (gp.ui.commandNum == 2) {
                 gp.gameState = GameState.PLAY;
+                gp.player.auracmons.add(new Firemon());
             }
         }
     }
