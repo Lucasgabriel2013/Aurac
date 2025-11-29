@@ -5,7 +5,9 @@ import utils.ImageUtils;
 import java.awt.image.BufferedImage;
 
 public class Firemon extends Auracmon {
-    private static final BufferedImage auracdexImage = ImageUtils.read("/auracmons/firemon1.png");;
+    private static final BufferedImage auracdexImage = ImageUtils.read("/auracmons/firemon/firemon1.png");
+    private static final BufferedImage playerBattleImage = ImageUtils.read("/auracmons/firemon/firemon2.png");
+    private static final BufferedImage enemyBattleImage = ImageUtils.read("/auracmons/firemon/firemon3.png");
 
     public Firemon() {
         type1 = AuracmonType.FIRE;
@@ -13,7 +15,8 @@ public class Firemon extends Auracmon {
 
         name = "Firemon";
         level = 5;
-        hp = 55;
+        hp = 65;
+        maxLife = 65;
     }
 
     @Override
@@ -23,11 +26,11 @@ public class Firemon extends Auracmon {
 
     @Override
     public BufferedImage playerBattleImage() {
-        return null;
+        return playerBattleImage;
     }
 
     @Override
     public BufferedImage enemyBattleImage() {
-        return null;
+        return enemyBattleImage;
     }
 }

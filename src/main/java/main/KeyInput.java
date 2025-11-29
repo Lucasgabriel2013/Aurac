@@ -28,6 +28,7 @@ public class KeyInput implements KeyListener {
             case INVENTORY -> new InventoryScreen(gp).input(code);
             case DIALOGUE -> new DialogueScreen(gp).input(code);
             case AURACMON_CHOICE -> new ChoiceScreen(gp).input(code);
+            case BATTLE -> new BattleScreen(gp, gp.ui.g2).input(code);
         }
     }
 

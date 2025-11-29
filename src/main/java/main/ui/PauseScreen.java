@@ -18,10 +18,10 @@ public class PauseScreen {
     }
     
     public void draw(Graphics2D g2) {
-        drawText(g2, "Resume");
-        drawText(g2, "Bag");
-        drawText(g2, "Save");
-        drawText(g2, "Quit");
+        drawText(g2, "Continuar");
+        drawText(g2, "Bolsa");
+        drawText(g2, "Salvar");
+        drawText(g2, "Sair");
     }
 
     private void drawText(Graphics2D g2, String text) {

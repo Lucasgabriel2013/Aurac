@@ -1,6 +1,7 @@
 package main;
 
 import entities.Entity;
+import tile.Tile;
 
 public class CollisionChecker {
     GamePanel gp;
@@ -9,7 +10,7 @@ public class CollisionChecker {
         this.gp = gp;
     }
 
-    public void checkCollision(Entity entity) {
+    public Tile checkCollision(Entity entity) {
         int entityLeftWorldX = entity.worldX + entity.solidArea.x;
         int entityRightWorldX = entity.worldX + entity.solidArea.x + entity.solidArea.width;
         int entityTopWorldY = entity.worldY + entity.solidArea.y;
@@ -31,7 +32,8 @@ public class CollisionChecker {
                 if (gp.tileM.tiles[tileNum1].collision || gp.tileM.tiles[tileNum2].collision) {
                     entity.onCollision = true;
                 }
-                break;
+
+                return gp.tileM.tiles[tileNum1];
             case DOWN:
                 entityBottomRow = (entityBottomWorldY + entity.speed) / gp.tileSize;
 
@@ -41,7 +43,7 @@ public class CollisionChecker {
                     entity.onCollision = true;
                 }
 
-                break;
+                return gp.tileM.tiles[tileNum1];
             case LEFT:
                 entityLeftCol = (entityLeftWorldX - entity.speed) / gp.tileSize;
 
@@ -51,7 +53,7 @@ public class CollisionChecker {
                     entity.onCollision = true;
                 }
 
-                break;
+                return gp.tileM.tiles[tileNum1];
             case RIGHT:
                 entityRightCol = (entityRightWorldX + entity.speed) / gp.tileSize;
 
@@ -61,8 +63,9 @@ public class CollisionChecker {
                     entity.onCollision = true;
                 }
 
-                break;
+                return gp.tileM.tiles[tileNum1];
         }
+        return null;
     }
 
     public int checkObject(Entity entity, boolean player) {

@@ -28,7 +28,6 @@ public class TileManager {
         getTileImage();
 
         loadMap("/maps/map.txt", 0);
-        loadMap("/maps/laboratory.txt", 1);
     }
 
     public void getTileImage() {

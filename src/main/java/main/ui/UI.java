@@ -8,7 +8,7 @@ import java.io.InputStream;
 
 public class UI {
     GamePanel gp;
-    Graphics2D g2;
+    public Graphics2D g2;
     Font pressStart;
     public boolean messageOn = false;
     public String message = "";
@@ -27,7 +27,8 @@ public class UI {
         }
     }
 
-    public void showMessage(String text) {
+    public void showMessage(String text, Graphics2D g2) {
+        this.g2 = g2;
         message = text;
         messageOn = true;
     }
@@ -44,11 +45,16 @@ public class UI {
             case INVENTORY -> new InventoryScreen(gp).draw(g2);
             case DIALOGUE -> new DialogueScreen(gp).draw(g2);
             case AURACMON_CHOICE -> new ChoiceScreen(gp).draw(g2);
+            case BATTLE -> new BattleScreen(gp, g2).draw(g2);
         }
 
         if (messageOn) {
-            g2.setFont(g2.getFont().deriveFont(30f));
-            g2.drawString(message, gp.tileSize * 5.2f, 50);
+            g2.setFont(g2.getFont().deriveFont(20f));
+            int length = (int) g2.getFontMetrics().getStringBounds(message, g2).getWidth();
+
+            int x = gp.screenWidth / 2 - length / 2;
+
+            g2.drawString(message, x, 50);
 
             messageCounter++;
 

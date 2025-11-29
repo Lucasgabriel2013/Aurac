@@ -3,6 +3,7 @@ package entities;
 import auracmons.Auracmon;
 import items.*;
 import main.*;
+import tile.Tile;
 import utils.ImageUtils;
 
 import java.awt.*;
@@ -37,7 +38,7 @@ public class Player extends Entity {
     public void setDefaultValues() {
         worldX = 800;
         worldY = 850;
-        speed = 6;
+        speed = 6; // Padrão: 6\
         direction = Direction.DOWN;
     }
 
@@ -66,7 +67,15 @@ public class Player extends Entity {
             }
 
             onCollision = false;
-            gp.collisionChecker.checkCollision(this);
+            Tile t = gp.collisionChecker.checkCollision(this);
+
+            if (t.equals(gp.tileM.tiles[1])) {
+                int random = (int) (Math.random() * 150);
+
+                if (random == 0) {
+                    gp.gameState = GameState.BATTLE;
+                }
+            }
 
             int objIndex = gp.collisionChecker.checkObject(this, true);
             interactObject(objIndex);
@@ -110,7 +119,7 @@ public class Player extends Entity {
             if (gp.obj[index].name.equals("AuracBall")) {
                 gp.playSound(1);
                 gp.obj[index] = null;
-                gp.ui.showMessage("+1 AuracBall");
+                gp.ui.showMessage("+1 AuracBall", gp.ui.g2);
                 items.add(new Auracball());
             } else if (gp.obj[index].name.equals("Bag")) {
                 gp.obj[index] = null;
